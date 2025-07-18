@@ -32,8 +32,8 @@ class GitHubRepoManager {
     };
   }
 
-  async fetchPrivateRepos(): Promise<Repository[]> {
-    const spinner = ora('Fetching your private repositories...').start();
+  async fetchRepos(): Promise<Repository[]> {
+    const spinner = ora('Fetching your repositories...').start();
     const repos: Repository[] = [];
     let page = 1;
     const perPage = 100;
@@ -43,7 +43,6 @@ class GitHubRepoManager {
         const response = await axios.get(`${this.apiBase}/user/repos`, {
           headers: this.headers,
           params: {
-            visibility: 'private',
             per_page: perPage,
             page: page,
             sort: 'updated',
@@ -60,7 +59,7 @@ class GitHubRepoManager {
         page++;
       }
 
-      spinner.succeed(`Found ${repos.length} private repositories`);
+      spinner.succeed(`Found ${repos.length} repositories`);
       return repos;
     } catch (error) {
       spinner.fail('Failed to fetch repositories');
@@ -95,8 +94,9 @@ class GitHubRepoManager {
     const lastUpdated = new Date(repo.updated_at).toLocaleDateString();
     const size = `${(repo.size / 1024).toFixed(2)} MB`;
     const language = repo.language || 'Unknown';
+    const visibility = repo.private ? chalk.yellow('[PRIVATE]') : chalk.green('[PUBLIC]');
     
-    return `${chalk.bold(repo.name)} - ${language} - ${size} - Last updated: ${lastUpdated}`;
+    return `${visibility} ${chalk.bold(repo.name)} - ${language} - ${size} - Last updated: ${lastUpdated}`;
   }
 }
 
@@ -114,10 +114,10 @@ async function main() {
   const manager = new GitHubRepoManager(token);
 
   try {
-    const repos = await manager.fetchPrivateRepos();
+    const repos = await manager.fetchRepos();
 
     if (repos.length === 0) {
-      console.log(chalk.yellow('No private repositories found.'));
+      console.log(chalk.yellow('No repositories found.'));
       return;
     }
 

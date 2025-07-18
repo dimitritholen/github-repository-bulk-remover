@@ -1,10 +1,11 @@
 # GitHub Repository Bulk Remover
 
-A CLI tool to list and bulk delete private GitHub repositories with an interactive checkbox interface.
+A CLI tool to list and bulk delete GitHub repositories (both public and private) with an interactive checkbox interface.
 
 ## Features
 
-- Lists all your private GitHub repositories
+- Lists all your GitHub repositories (both public and private)
+- Visual indicators for repository visibility ([PRIVATE] / [PUBLIC])
 - Interactive checkbox selection (use space to select, enter to confirm)
 - Shows repository details: name, language, size, and last update date
 - Double confirmation before deletion to prevent accidents
@@ -50,7 +51,7 @@ node dist/index.js
 
 ## How it works
 
-1. The tool fetches all your private repositories
+1. The tool fetches all your repositories (both public and private)
 2. Displays them in an interactive checkbox list
 3. Use space to select/deselect repositories
 4. Press enter to confirm your selection
@@ -59,7 +60,7 @@ node dist/index.js
 
 ## Safety Features
 
-- Only lists private repositories
+- Lists both public and private repositories with clear visibility indicators
 - Requires explicit selection of repositories to delete
 - Double confirmation before any deletion
 - Clear warnings about the irreversible nature of deletion
@@ -74,7 +75,8 @@ The tool uses the GitHub REST API v3 with the following endpoints:
 ## Important Notes
 
 - Deleting a repository is **permanent** and cannot be undone
-- Deleting a private repository will also delete all its forks
+- Deleting a repository will also delete all its forks
+- Be extra careful when deleting public repositories as they may be used by others
 - You need appropriate permissions to delete repositories
 - The token must have the `delete_repo` scope
 
