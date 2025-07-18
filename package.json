@@ -1,0 +1,29 @@
+{
+  "name": "github-repo-remover",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js",
+    "clean": "rm -rf dist"
+  },
+  "bin": {
+    "github-repo-remover": "./dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.0.14",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/inquirer": "^9.0.8",
+    "axios": "^1.10.0",
+    "chalk": "^4.1.2",
+    "inquirer": "^9.2.23",
+    "ora": "^5.4.1"
+  }
+}
