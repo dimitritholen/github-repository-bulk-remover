@@ -4,6 +4,9 @@ A TypeScript CLI tool to list and bulk delete GitHub repositories (both public a
 
 ⚠️ **WARNING**: This tool permanently deletes repositories. Use with extreme caution!
 
+![screenshot](ghr.png)
+
+
 ## Features
 
 - Lists all your GitHub repositories (both public and private)
